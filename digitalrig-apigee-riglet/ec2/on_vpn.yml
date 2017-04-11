@@ -4,5 +4,7 @@
 - include: ../knocker.yml
 - include: ../ad-manager.yml
 - include: ../front-end.yml
+- include: ../knocker.yml
 - include: ../gateway.yml
+- include: ../knocker.yml
 - include: ../docker-ci-cd.yml
