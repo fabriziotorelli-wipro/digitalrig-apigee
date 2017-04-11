@@ -1,0 +1,43 @@
+  - name: install postgres client
+    yum: name=postgresql state=latest
+
+  - name: Install sonar
+    yum: name=http://kent.dl.sourceforge.net/project/sonar-pkg/rpm/noarch/{{ sonar_version }}.noarch.rpm state=present
+    register: task_result
+    until: task_result|success
+    retries: 5
+    delay: 1
+
+  - name: copy create_schema.sql file over
+    copy: src=create_schema.sql dest=~/create_schema.sql
+
+  - name: create database schema
+    shell: psql -U {{ sonar_database_user }} -h {{ sonar_db_host }} {{ sonar_database }} < ~/create_schema.sql
+    environment:
+      PGPASSWORD: "{{ sonar_database_password }}"
+
+  - name: sonar configuration
+    lineinfile:
+      dest: "{{ sonar_dir }}/conf/sonar.properties"
+      regexp: "{{ item.regexp }}"
+      line: "{{ item.line }}"
+    with_items:
+      - { regexp: '^#?sonar.web.port=', line: 'sonar.web.port={{ sonar_application_port }}' }
+      - { regexp: '^#?sonar.jdbc.url=jdbc:postgresql', line: 'sonar.jdbc.url=jdbc:postgresql://{{ sonar_db_host }}/{{ sonar_database }}' }
+      - { regexp: '^#?sonar.jdbc.username=', line: 'sonar.jdbc.username={{ sonar_database_user }}' }
+      - { regexp: '^#?sonar.jdbc.password=', line: 'sonar.jdbc.password={{ sonar_database_password }}' }
+      - { regexp: '^#?sonar.web.context=', line: 'sonar.web.context=/sonar' }
+
+  - name: ensure that sonar is running
+    service: name=sonar state=started enabled=true
+
+  - name: download the javascript plugin
+    get_url:
+        url: http://sonarsource.bintray.com/Distribution/sonar-javascript-plugin/sonar-javascript-plugin-2.14.jar
+        dest: /tmp/
+
+  - name: install the javascript plugin
+    copy:
+      src: /tmp/sonar-javascript-plugin-2.14.jar
+      dest: "{{ sonar_dir }}/extensions/plugins"
+      remote_src: true

@@ -1,0 +1,13 @@
+- hosts: rancher-ha-db
+  become: yes
+  roles:
+    - role: mysql
+      mysql_import: true
+      mysql_databases:
+        - name: cattle
+
+      mysql_users:
+        - name: cattle
+          pass: cattle
+      postgresql_listen_addresses: ["0.0.0.0"]
+      postgresql_pg_hba_passwd_hosts: ["0.0.0.0/0"]

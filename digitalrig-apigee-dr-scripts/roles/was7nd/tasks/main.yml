@@ -1,0 +1,22 @@
+  - name: Check if software pacakge already exists on my local system
+    stat: path={{ was_target_location }}{{ was_tar_name }}
+    register: was_source_package
+
+  - name: Create temp deployment folder
+    file: path={{ was_target_location }} state=directory
+
+  - name: Bring package from S3 bucket to local system
+    s3: bucket={{ s3_bucket_fileshare }} object={{ was_tar_name }} dest={{ was_target_location }}{{ was_tar_name }} mode=get
+    when: not was_source_package.stat.exists
+
+  - name: Moving installation component
+    template: src=response.j2 dest={{ was_driver_file }}response mode=a+rw
+
+  - name: Extracting WAS package
+    unarchive: src={{ was_target_location }}{{ was_tar_name }} dest={{ was_target_location }} copy=no
+
+  - name: Creating target installation directory
+    file: state=directory  path={{install_location}}
+
+  - name: Installing server
+    shell: "{{ was_target_location }}WAS/install -options {{ was_driver_file }}response -silent"

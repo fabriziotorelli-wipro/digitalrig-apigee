@@ -1,0 +1,26 @@
+# Following properties will install WAS with two profiles AppSrv and Dmg
+  -OPT silentInstallLicenseAcceptance={{ license_acceptance }}
+  -OPT allowNonRootSilentInstall={{ allow_non_root_install }}
+  -OPT disableOSPrereqChecking={{ disable_os_precheck }}
+  -OPT checkFilePermissions={{ check_file_permissions }}
+  -OPT installType={{ install_type }}
+  -OPT profileType={{ profile_type }}
+  -OPT feature={{ feature }}
+  -OPT PROF_enableAdminSecurity={{ enable_admin_security }}
+  -OPT PROF_adminUserName={{ user_name }}
+  -OPT PROF_adminPassword={{ password }}
+ # Update the path to match installation path at target system.
+  -OPT installLocation={{ install_location }}
+  -OPT traceFormat={{ trace_format }}
+  -OPT traceLevel={{ trace_level }}
+  -OPT PROF_profileName={{ profile_name }}
+  -OPT PROF_hostName={{ host_name }}
+  -OPT PROF_nodeName={{ node_name }}
+  -OPT PROF_cellName={{ cell_name }}
+  -OPT PROF_defaultPorts={{ default_ports }}
+
+# For custom port comment PROF_defaultPorts above and use below options, Admin console port would be 60001, web/app port would be 61000
+# -OPT PROF_validatePorts={{ default_ports }}
+# -OPT PROF_startingPort={{ prof_starting_port }}
+# -OPT PROF_nodeStartingPort={{ prof_node_starting_port }}
+
