@@ -2,8 +2,8 @@ provider "aws" {
   region = "${var.region}"
 }
 
-module "rancher" {
-  source = "../../digitalrig-apigee-iaas-modules/terraform/modules/aws/rancher-minimal"
+module "apigee" {
+  source = "../../digitalrig-apigee-iaas-modules/terraform/modules/aws/apigee"
 
   region = "${var.region}"
   vpc-net-cidr = "${var.vpc-net-cidr}"
@@ -32,7 +32,6 @@ module "rancher" {
   platform-ref = "${var.platform-ref}"
 
   default-linux-ami = "${var.default-linux-ami}"
-  rancheros-ami = "${var.rancheros-ami}"
 
   vpn-knock-lower-port = "${var.vpn-knock-lower-port}"
   vpn-knock-upper-port = "${var.vpn-knock-upper-port}"

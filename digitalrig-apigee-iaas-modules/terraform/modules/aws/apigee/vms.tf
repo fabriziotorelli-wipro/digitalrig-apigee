@@ -145,7 +145,7 @@ resource "aws_route53_record" "gateway" {
 
 ## Docker CI CD Machine
 resource "aws_instance" "docker-ci-cd" {
-  ami = "${coalesce(var.rancheros-ami, lookup(var.default-rancheros-ami, var.region))}"
+  ami = "${coalesce(var.linux-ami, lookup(var.default-linux-ami, var.region))}"
   instance_type = "t2.medium"
   key_name = "${var.internal-keypair}"
   iam_instance_profile = "internal-instance"
