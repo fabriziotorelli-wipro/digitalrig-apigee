@@ -33,8 +33,6 @@ To build the rig on EC2:
     * `edgemicro_private_cloud`: <yes-or-not-allowed-for-admins-only>
     * `edgemicro_router`: <apigee-full-qualified-router-url> (ex: http://myorg.myenv.apigee.net)
     * `edgemicro_api_mngmt`: <apigee-full-qualified-api-manager-url> (ex: http://myorg.myenv.apigee.net)
-    * `apigee_gateway_proxy_url`: APIGee environment Gateway Reverse Proxy url
-    * `apigee_edge_proxy_path`: APIGee environment Gateway Reverse Proxy url
 
 
 0. Define X509 Certificate keys (for a self-signed server certificate with common name as the `APIGee organization gateway hostname or IP` for defining remote access to Gateway Port Services and another server certificate with `localhost` common name for defining local access to Gateway Index Services), for instance as follow :
@@ -103,6 +101,11 @@ Remember to store new keys in `vars` file in the located at : `/digital-apigee-r
   `ansible-playbook -i ./inventory/localhost -e @inputs -e @vars -e @private ../tf_outputs.yml`
 
 0. Define on APIGee gateway web console a Proxy named `gateway`, type `reverse proxy`, using the gateway IP (in `/digitalrig-apigee-riglet/etc/tmp/_tf_ouputs` you have an ip address corresponding to the variable named `gateway_public_ip`) and port `10099`. The URL will be pretty much similar to this sampler : `https://xxx.xxx.xxx.xxx:10099/`.
+
+0. Define variables in `inputs` file :
+  * `apigee_gateway_proxy_url`: APIGee environment Gateway Reverse Proxy url (ex: http://myorg.myenv.apigee.net/gateway)
+  * `apigee_edge_proxy_path`: APIGee environment Gateway Reverse Proxy url (ex: http://myorg.myenv.apigee.net/edgemicro_gateway)
+
 
 0. Make sure you're able to open ssh connection to jump host. Command and hostname are the output of "show jump host information" task in the previous step.
    If you can't open ssh connection, please make sure to configure ssh properly. See Troubleshooting section.

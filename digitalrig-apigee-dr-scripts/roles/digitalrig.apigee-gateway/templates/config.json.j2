@@ -11,7 +11,7 @@
     "password": "",
     "usetokenprotection": false,
     "securitytoken": "",
-    "usetls": true,
+    "usetls": {{ gateway_services_tsl_enabled }},
     "cacertificatefile": "{{ gateway_services_ca_certificate_file }}",
     "tlsx509certificatefile": "{{ gateway_services_x509_certificate_file }}",
     "tlsx509certificatekeyfile": "{{ gateway_services_x509_key_file }}"

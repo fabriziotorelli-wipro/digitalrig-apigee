@@ -166,14 +166,16 @@ gateway_services_srl_crs:
 gateway_services_ca_passphrase:
 
 gateway_security_folder: /root/.ssh
-gateway_index_x509_certificate_file: /root/security/server.pem
-gateway_index_x509_key_file: /root/security/server.key
+gateway_index_tsl_enabled: false
+gateway_index_x509_certificate_file:
+gateway_index_x509_key_file:
 gateway_index_server_crs_file:
 gateway_index_ca_certificate_file:
 gateway_index_ca_key_file:
 gateway_index_ca_srl_file:
-gateway_services_x509_certificate_file: /root/security/remote.pem
-gateway_services_x509_key_file: /root/security/remote.key
+gateway_services_tsl_enabled: false
+gateway_services_x509_certificate_file:
+gateway_services_x509_key_file:
 gateway_services_server_crs_file:
 gateway_services_ca_certificate_file:
 gateway_services_ca_key_file:

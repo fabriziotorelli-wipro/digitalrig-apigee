@@ -6,7 +6,7 @@
   "protocol": "http",
   "usetokenprotection": false
   "securitytoken": "",
-  "usetls": true,
+  "usetls": {{ gateway_index_tsl_enabled }},
   "cacertificatefile": "{{ gateway_index_ca_certificate_file }}",
   "tlsx509certificatefile": "{{ gateway_index_x509_certificate_file }}",
   "tlsx509certificatekeyfile": "{{ gateway_index_x509_key_file }}"
