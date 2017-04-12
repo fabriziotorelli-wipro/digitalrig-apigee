@@ -5,6 +5,7 @@
     - golang
     - hg
     - ca-certificates
+    - sudo
 
 - name: Define GOPATH folder
   file: path=~/go/src state=directory
@@ -12,8 +13,16 @@
 - name: Define GOPATH environment variable
   shell: echo "export GOPATH=~/go" > ~/.bashrc && export GOPATH=~/go
 
-- name: GO get Gateway repository
-  shell: git clone https://github.com/fabriziotorelli-wipro/go-gateway-reverse gateway
+- name: Define Unit Test module base folder
+  file: path=~/go/src/github.com/stretchr state=directory
+
+- name: git clone Unit Test module from repository
+  shell: git clone https://github.com/stretchr/testify.git
+  args:
+    chdir: ~/go/src/github.com/stretchr
+
+- name: git clone Gateway module from repository
+  shell: git clone https://github.com/fabriziotorelli-wipro/go-gateway-reverse.git gateway
   args:
     chdir: ~/go/src
 
@@ -27,8 +36,14 @@
   shell: cp -f gateway /usr/local/bin
   args:
     chdir: ~/go/src/gateway
-- name: Define gateway no-login user
-  shell: adduser gateway -s /sbin/nologin
+    create: /usr/local/bin/gateway
+
+# - name: Define gateway no-login user
+#   shell: adduser gateway -s /sbin/nologin
+
+- name: Associate centos user to sudoers
+  shell: usermod -aG sudoers centos
+  ignore_errors: yes
 
 - name: Define Gateway Config Folder
   file: path=/root/gateway state=directory owner=gateway force=yes mode=777

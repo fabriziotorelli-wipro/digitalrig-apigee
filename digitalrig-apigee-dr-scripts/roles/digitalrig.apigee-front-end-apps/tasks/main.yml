@@ -25,8 +25,10 @@
   copy: src={{ item }} dest=/root/nginx/
   with_items:
     - directory.html
-    - docker-registry.conf
     - docker-registry.htpasswd
+
+- name: Define Nginx dunamic config
+  trmplate: src="docker-registry.conf.j2" dest=/root/nginx/docker-registry.conf
 
 - name: Ensure that Nginx ssl configuration directory exists
   file: path=/root/ssl state=directory mode=0777

@@ -100,7 +100,24 @@ Remember to store new keys in `vars` file in the located at : `/digital-apigee-r
 0. Generate Ansible var file from TF outputs:
   `ansible-playbook -i ./inventory/localhost -e @inputs -e @vars -e @private ../tf_outputs.yml`
 
-0. Define on APIGee gateway web console a Proxy named `gateway`, type `reverse proxy`, using the gateway IP (in `/digitalrig-apigee-riglet/etc/tmp/_tf_ouputs` you have an ip address corresponding to the variable named `gateway_public_ip`) and port `10099`. The URL will be pretty much similar to this sampler : `https://xxx.xxx.xxx.xxx:10099/`.
+0. Define on APIGee gateway web console (DEVELOP) a Proxy named `gateway`, type `reverse proxy`, using the gateway IP (in `/digitalrig-apigee-riglet/etc/tmp/_tf_ouputs` you have an ip address corresponding to the variable named `gateway_public_ip`) and port `10099`. The URL will be pretty much similar to this sampler : `https://xxx.xxx.xxx.xxx:10099/`.
+
+0. Define on APIGee gateway web console an `Access Control` Rule in development -> policies -> Add Access Control and defining changes as follow :
+```xml
+<IPRules noRuleMatchAction="DENY">
+    <MatchRule action="ALLOW">
+        <SourceAddress mask="32">$font-end-public-ip</SourceAddress>
+    </MatchRule>
+</IPRules>
+```
+Replacing the $font-end-public-ip with value in file `/digitalrig-apigee-riglet/etc/tmp/_tf_ouputs` corresponding to the variable named `front_end_public_ip`. In this way the access to your Gateway is allowed only in https and only from front-end Ngnix call (very secure).
+
+0. Define on APIGee gateway web console a Self-Signed certificate in ADMIN -> Environment (prod) -> TLS section :
+  Define A TLS Keystore and define a certificate with common name : in file `/digitalrig-apigee-riglet/etc/tmp/_tf_ouputs` corresponding to the variable named `front_end_public_ip` and alternative names all host you want access to APIGee (very secure) and alis name `myorg-frontend`. (Repeate previous bullet points to create another identical proxy named `edgemicro_gateway`)
+
+0. Define on APIGee gateway web console (DEVELOP) a Shared Flow for production and deploy the flow (Now your proxy is operative).
+
+0. In case of licensed APIGee Edge account you can change the SSL Virtual Host [ADMIN -> Environment (prod)] enabling Client Auth and associating the certificate you have just defined.
 
 0. Define variables in `inputs` file :
   * `apigee_gateway_proxy_url`: APIGee environment Gateway Reverse Proxy url (ex: http://myorg.myenv.apigee.net/gateway)
