@@ -19,7 +19,7 @@ Amazon Web Services
 ## What is provided with the installation ?
 
 The following resource are provided with the installation :
-* APIGee Infrastructure (Dev or Prod)
+* APIGee Infrastructure (Test Case scenarios)
 * APIGee Architecture set-up
 * Pipeline Deployment (Jenkins Pipeline)
 
