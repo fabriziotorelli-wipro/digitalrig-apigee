@@ -11,15 +11,15 @@ output "default-vpc-id" {
   value = "${aws_vpc.core.id}"
 }
 
-resource "aws_subnet" "dmz" {
+resource "aws_subnet" "public" {
   vpc_id = "${aws_vpc.core.id}"
-  cidr_block = "${var.dmz-net-cidr}"
+  cidr_block = "${var.public-net-cidr}"
   map_public_ip_on_launch = 1
   depends_on = ["aws_internet_gateway.default"]
   tags {
-    Name = "${var.ansible-domain}-dmz"
+    Name = "${var.ansible-domain}-public"
   }
-  availability_zone = "${var.region}${var.dmz-availability-zone}"
+  availability_zone = "${var.region}${var.public-availability-zone}"
 }
 
 resource "aws_subnet" "internal" {
@@ -42,15 +42,20 @@ resource "aws_internet_gateway" "default" {
   }
 }
 
-resource "aws_route_table" "dmz" {
+resource "aws_route_table" "public" {
   vpc_id = "${aws_vpc.core.id}"
 
+  /*route {
+    cidr_block = "10.0.0.0/16"
+    gateway_id = "${aws_internet_gateway.default.id}"
+  }*/
   route {
     cidr_block = "0.0.0.0/0"
     gateway_id = "${aws_internet_gateway.default.id}"
   }
+
   tags {
-    Name = "${var.ansible-domain}-dmz"
+    Name = "${var.ansible-domain}-public"
   }
 }
 
@@ -66,17 +71,17 @@ resource "aws_route_table" "internal" {
   }
 }
 
-output "dmz-route-table-id" {
-  value = "${aws_route_table.dmz.id}"
+output "public-route-table-id" {
+  value = "${aws_route_table.public.id}"
 }
 
 output "internal-route-table-id" {
   value = "${aws_route_table.internal.id}"
 }
 
-resource "aws_route_table_association" "dmz" {
-  subnet_id = "${aws_subnet.dmz.id}"
-  route_table_id = "${aws_route_table.dmz.id}"
+resource "aws_route_table_association" "public" {
+  subnet_id = "${aws_subnet.public.id}"
+  route_table_id = "${aws_route_table.public.id}"
 }
 
 resource "aws_route_table_association" "internal" {
@@ -100,6 +105,36 @@ resource "aws_security_group" "default" {
     to_port = 0
     protocol = "-1"
     self = "true"
+  }
+  ingress {
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    cidr_blocks = ["10.0.0.0/16"]
+  }
+  ingress {
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  ingress {
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    cidr_blocks = ["${var.public-net-cidr}"]
+  }
+  egress {
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    cidr_blocks = ["10.0.0.0/16"]
+  }
+  egress {
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    cidr_blocks = ["${var.public-net-cidr}"]
   }
   egress {
     from_port = 0
@@ -138,7 +173,6 @@ resource "aws_security_group" "ovpn" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-
   ingress {
     from_port = 0
     to_port = 0
@@ -146,6 +180,24 @@ resource "aws_security_group" "ovpn" {
     self = "true"
   }
   ingress{
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    security_groups = ["${aws_security_group.default.id}"]
+  }
+  ingress {
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    cidr_blocks = ["10.0.0.0/16"]
+  }
+  egress {
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    cidr_blocks = ["10.0.0.0/16"]
+  }
+  egress{
     from_port = 0
     to_port = 0
     protocol = "-1"
@@ -182,7 +234,7 @@ resource "aws_vpc_dhcp_options_association" "default" {
 
 resource "aws_route53_zone" "internal-zone" {
   name = "riglet"
-  comment = "Rancher RIG Orchestrator Zone (${var.ansible-domain})(region:${var.region})"
+  comment = "APIGee Sampler Zone (${var.ansible-domain})(region:${var.region})"
   vpc_id = "${aws_vpc.core.id}"
 }
 

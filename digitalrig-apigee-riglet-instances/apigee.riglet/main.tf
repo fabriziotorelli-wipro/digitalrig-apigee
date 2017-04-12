@@ -7,8 +7,8 @@ module "apigee" {
 
   region = "${var.region}"
   vpc-net-cidr = "${var.vpc-net-cidr}"
-  dmz-net-cidr = "${var.dmz-net-cidr}"
-  dmz-availability-zone = "${var.dmz-availability-zone}"
+  public-net-cidr = "${var.public-net-cidr}"
+  public-availability-zone = "${var.public-availability-zone}"
   internal-net-cidr = "${var.internal-net-cidr}"
   internal-net-prefix = "${var.internal-net-prefix}"
   internal-availability-zone = "${var.internal-availability-zone}"
@@ -81,8 +81,8 @@ output "rig-internal-route-table-id" {
  value = "${module.apigee.internal-route-table-id}"
 }
 
-output "rig-dmz-route-table-id" {
- value = "${module.apigee.dmz-route-table-id}"
+output "rig-public-route-table-id" {
+ value = "${module.apigee.public-route-table-id}"
 }
 
 output "rig-route53-internal-zone-id" {

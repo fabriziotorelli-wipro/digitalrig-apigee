@@ -8,8 +8,8 @@ server {
     listen 443;
     server_name front-end;
 
-    ssl_certificate           /etc/nginx/cert.crt;
-    ssl_certificate_key       /etc/nginx/cert.key;
+    ssl_certificate           /usr/share/nginx/ssl/server.pem;
+    ssl_certificate_key       /usr/share/nginx/ssl/server.key;
 
     ssl on;
     ssl_session_cache  builtin:1000  shared:SSL:10m;
@@ -28,62 +28,50 @@ server {
     }
 
     location /docker-registry-ui {
-       rewrite ^(.*)$ http://front-end.riglet:8081 break;
+       root   http://{{ gateway_private_ip }}:8081;
        proxy_set_header        Host $host;
        proxy_set_header        X-Real-IP $remote_addr;
        proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
        proxy_set_header        X-Forwarded-Proto $scheme;
 
-       proxy_pass          https://localhost;
+       proxy_pass          http://{{ gateway_private_ip }}:8081;
+       proxy_pass_request_body on;
+       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
        proxy_read_timeout  90;
-
-       proxy_redirect      https://localhost:443 http://front-end.riglet:8081;
     }
 
-    location /gateway {
-
+    location /apigee {
       #ssl_certificate           /etc/nginx/apigee.crt;
       #ssl_certificate_key       /etc/nginx/apigee.key;
 
-      proxy_set_header        Host $host;
-      proxy_set_header        X-Real-IP $remote_addr;
-      proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
-      proxy_set_header        X-Forwarded-Proto $scheme;
-
       # Fix the “It appears that your reverse proxy set up is broken" error.
-      proxy_pass          https://localhost/proxy;
+      proxy_pass          {{ apigee_gateway_proxy_url }};
+      proxy_pass_request_body on;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
       proxy_read_timeout  90;
-
-      proxy_redirect      https://localhost/proxy {{ apigee_gateway_proxy_url }};
     }
 
     location /edge {
-
       #ssl_certificate           /etc/nginx/apigee.crt;
       #ssl_certificate_key       /etc/nginx/apigee.key;
 
-      proxy_set_header        Host $host;
-      proxy_set_header        X-Real-IP $remote_addr;
-      proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
-      proxy_set_header        X-Forwarded-Proto $scheme;
-
       # Fix the “It appears that your reverse proxy set up is broken" error.
-      proxy_pass          https://localhost/edge;
+      proxy_pass          {{ apigee_gateway_proxy_url }};
+      proxy_pass_request_body on;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
       proxy_read_timeout  90;
-
-      proxy_redirect      https://localhost/edge {{ apigee_gateway_proxy_url }};
     }
 
     error_page  404 /directory.html;
 
-    location = /directory.html {
+    location /directory.html {
         root   /usr/share/nginx/html;
     }
 
     # redirect server error pages to the static page /50x.html
     #
     error_page   500 502 503 504  /50x.html;
-    location = /50x.html {
+    location /50x.html {
         root   /usr/share/nginx/html;
     }
 }

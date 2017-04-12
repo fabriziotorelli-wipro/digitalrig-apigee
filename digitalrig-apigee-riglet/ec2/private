@@ -3,8 +3,8 @@
 tf_shared:
  - region
  - vpc_net_cidr
- - dmz_net_cidr
- - dmz_availability_zone
+ - public_net_cidr
+ - public_availability_zone
  - internal_net_cidr
  - internal_net_prefix
  - internal_availability_zone
@@ -32,7 +32,7 @@ tf_outputs:
  - openvpn-host
  - riglet-vpc-id
  - rig-internal-route-table-id
- - rig-dmz-route-table-id
+ - rig-public-route-table-id
  - rig-route53-internal-zone-id
  - rig-default-security-group-id
  - rig-private-subnet-id

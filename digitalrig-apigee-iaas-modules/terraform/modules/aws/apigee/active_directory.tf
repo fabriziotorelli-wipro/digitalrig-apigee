@@ -6,7 +6,7 @@ resource "aws_directory_service_directory" "simple-ad" {
 
   vpc_settings {
     vpc_id = "${aws_vpc.core.id}"
-    subnet_ids = ["${aws_subnet.internal.id}", "${aws_subnet.dmz.id}"]
+    subnet_ids = ["${aws_subnet.internal.id}", "${aws_subnet.public.id}"]
   }
 }
 

@@ -36,7 +36,7 @@
     - directory.html
     - docker-registry.htpasswd
 
-- name: Define Nginx dunamic config
+- name: Define Nginx dynamic config
   template: src="ngnix-config.conf.j2" dest=/root/nginx/apigee-config.conf
 
 - name: Ensure that Nginx ssl configuration directory exists
@@ -54,11 +54,13 @@
 - name: ensure Docker Compose registry dir
   file: name="/usr/share/compose-scripts/registry" state=directory owner=root group=root
 
+- name: Stop NewRelic
+  shell: /etc/init.d/newrelic-sysmond stop && systemctl disable newrelic-sysmond.service
 
 - name: Copy Nginx files
   template: src=docker-compose.yml.j2 dest=/usr/share/compose-scripts/registry/docker-compose.yml
 
-- name: start registry and registy ui
+- name: start Docker Registry, Registy UI, Nginx and APIGee Micro-Edge machine
   become: yes
   shell: docker-compose up -d --remove-orphans
   args:

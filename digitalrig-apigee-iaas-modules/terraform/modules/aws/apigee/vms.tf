@@ -5,12 +5,13 @@ resource "aws_instance" "nat" {
   key_name = "${var.internal-keypair}"
   vpc_security_group_ids = [
     "${aws_security_group.default.id}"]
-  subnet_id = "${aws_subnet.dmz.id}"
+  subnet_id = "${aws_subnet.public.id}"
   source_dest_check = false
   associate_public_ip_address = false
   user_data = "nat"
   tags {
     Name = "${var.ansible-domain}-nat"
+    Rig = "${var.ansible-domain}"
   }
 }
 
@@ -22,7 +23,7 @@ resource "aws_instance" "ovpn" {
   vpc_security_group_ids = [
     "${aws_security_group.default.id}",
     "${aws_security_group.ovpn.id}"]
-  subnet_id = "${aws_subnet.dmz.id}"
+  subnet_id = "${aws_subnet.public.id}"
   source_dest_check = false
   associate_public_ip_address = true
   user_data = "${replace("${data.template_file.client_cloud_config.rendered}", "REPLACE_HOSTNAME", "ovpn")}"
@@ -65,8 +66,10 @@ resource "aws_instance" "front-end" {
   key_name = "${var.internal-keypair}"
   iam_instance_profile = "internal-instance"
   vpc_security_group_ids = [
-    "${aws_security_group.default.id}"]
-  subnet_id = "${aws_subnet.internal.id}"
+    "${aws_security_group.default.id}",
+    "${aws_security_group.ovpn.id}"
+  ]
+  subnet_id = "${aws_subnet.public.id}"
   source_dest_check = false
   associate_public_ip_address = true
   user_data = "${replace("${data.template_file.client_cloud_config.rendered}", "REPLACE_HOSTNAME", "front-end")}"
@@ -108,18 +111,20 @@ resource "aws_instance" "gateway" {
   key_name = "${var.internal-keypair}"
   iam_instance_profile = "internal-instance"
   vpc_security_group_ids = [
-    "${aws_security_group.default.id}"]
-  subnet_id = "${aws_subnet.internal.id}"
+    "${aws_security_group.default.id}",
+    "${aws_security_group.ovpn.id}"
+  ]
+  subnet_id = "${aws_subnet.public.id}"
   source_dest_check = false
   associate_public_ip_address = true
   user_data = "${replace("${data.template_file.client_cloud_config.rendered}", "REPLACE_HOSTNAME", "gateway")}"
   root_block_device {
     volume_type = "gp2"
-    volume_size = 80
+    volume_size = 40
   }
   tags {
     Name = "${var.ansible-domain}-gateway"
-    Role = "gateway"
+    Role = "gateway,ad-client"
     Rig = "${var.ansible-domain}"
   }
 }
@@ -150,18 +155,20 @@ resource "aws_instance" "docker-ci-cd" {
   key_name = "${var.internal-keypair}"
   iam_instance_profile = "internal-instance"
   vpc_security_group_ids = [
-    "${aws_security_group.default.id}"]
-  subnet_id = "${aws_subnet.internal.id}"
+    "${aws_security_group.default.id}",
+    "${aws_security_group.ovpn.id}"
+  ]
+  subnet_id = "${aws_subnet.public.id}"
   source_dest_check = false
   associate_public_ip_address = false
   user_data = "${replace("${data.template_file.client_cloud_config.rendered}", "REPLACE_HOSTNAME", "docker-ci-cd")}"
   root_block_device {
     volume_type = "gp2"
-    volume_size = 80
+    volume_size = 40
   }
   tags {
     Name = "${var.ansible-domain}-docker-ci-cd"
-    Role = "docker-ci-cd"
+    Role = "docker-ci-cd,ad-client"
     Rig = "${var.ansible-domain}"
   }
 }

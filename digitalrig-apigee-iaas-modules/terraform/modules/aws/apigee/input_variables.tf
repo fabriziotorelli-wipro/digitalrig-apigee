@@ -1,7 +1,7 @@
 variable "region"               {  }
 variable "vpc-net-cidr"         {  }
-variable "dmz-net-cidr"         {  }
-variable "dmz-availability-zone"{  }
+variable "public-net-cidr"         {  }
+variable "public-availability-zone"{  }
 variable "internal-net-cidr"    {  }
 variable "internal-net-prefix"  {  }
 variable "internal-availability-zone" {}

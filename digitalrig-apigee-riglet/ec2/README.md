@@ -22,7 +22,7 @@ To build the rig on EC2:
     * `tf_config_path`: by default should point to `digital-riglet-instances/rancher.riglet`. If you need to edit this, duplicate it and modify the new file.
     * `region`
     * `ansible-domain`: unique identifier for your riglet, e.g. `<initial><lastname>.rancher.riglet` or `<team name>.rancher.riglet`
-    * `dmz-availability-zone` and `internal_availability_zone`: check your region to see what's available. These **must** be different.
+    * `public-availability-zone` and `internal_availability_zone`: check your region to see what's available. These **must** be different.
     * `internal_keypair` and `keypair`: they are not named the same in each region(!). Create your own with your private key in the AWS EC2 console -> Network and Security -> Key Pairs then add key pair.., please provide a standard name such as : rancher-<initial><lastname>-<region>-keypair (It's suitable to create one key pair with you pubic key and save the name in the inputs file)
     * `ad_password:`: define administrative password for AD and the same you can use to login the OVPN.
     * `edgemicro_org`: <my-organization-here>
