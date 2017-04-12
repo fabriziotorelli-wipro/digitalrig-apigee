@@ -155,6 +155,14 @@ This step will create server features and the Jenkins test pipeline
       IdentityFile <<path/to/internal/private/key>>
   ```
 
+### Referred articles
+
+Here some technical material :
+* [Configure Edge Micro-Gateway](http://docs.apigee.com/microgateway/latest/setting-and-configuring-edge-microgateway)
+* [Gateway](https://github.com/fabriziotorelli-wipro/go-gateway-reverse/blob/master/README.md)
+* [Edge Micro-Gateway Docker Image](https://github.com/fabriziotorelli-wipro/rig-docker-machines/blob/master/2/apigee-edge-microgateway/README.md)
+* [Buildit] (https://medium.com/buildit)
+
 ## Tips
 * _-vvvv_ is your friend to understand why your playbook does not work
 * It uses mixed dynamic (EC2 tag-based) and static (localhost and group_vars) inventory

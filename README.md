@@ -29,7 +29,7 @@ Follow the installation guides provided in each implementation.
 
 ## License
 
-Copyright (c) 2016-2017 [BuildIt, Inc.](http://buildit.digital)
+Copyright (c) 2016-2017 [BuildIt, Inc.](https://medium.com/buildit)
 
 Licensed under the [MIT](/LICENSE) License (the "License");
 you may not use this file except in compliance with the License.
