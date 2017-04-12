@@ -76,7 +76,7 @@ resource "aws_instance" "front-end" {
   }
   tags {
     Name = "${var.ansible-domain}-front-end"
-    Role = "rancher-front-end,ad-client"
+    Role = "front-end,ad-client"
     Rig = "${var.ansible-domain}"
   }
 }

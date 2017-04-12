@@ -126,60 +126,61 @@ gateway_index_x509_key: |
     DLFIHdYvuYXZPGjHDHLd9Y8/XjTpaMzrdmqh4YPmnGMu1tvQbx4RF3sqq00LktEo
     34Zxvm4caKAnnbiIrXcZ5o6/38nuxsg=
     -----END EC PRIVATE KEY-----
-gateway_index_server_crs:
-gateway_index_ca_certificate:
-gateway_index_srl_key:
-gateway_index_ca_key:
-gateway_index_ca_passphrase:
+gateway_index_server_crs: ""
+gateway_index_ca_certificate: ""
+gateway_index_srl_key: ""
+gateway_index_ca_key: ""
+gateway_index_ca_passphrase: ""
 gateway_services_x509_certificate: |
     -----BEGIN CERTIFICATE-----
-    MIICxDCCAkqgAwIBAgIJAI6RYdlQIp6NMAoGCCqGSM49BAMCMIGfMQswCQYDVQQG
+    MIIC6DCCAm6gAwIBAgIJALTc5jHi1gTtMAoGCCqGSM49BAMCMIGxMQswCQYDVQQG
     EwJJRTEPMA0GA1UECAwGRHVibGluMQ8wDQYDVQQHDAZEdWJsaW4xIjAgBgNVBAoM
-    GUJ1aWxkSXQgV2lwcm8gRGlnaXRhbCBMdGQxCzAJBgNVBAsMAklUMRIwEAYDVQQD
-    DAlsb2NhbGhvc3QxKTAnBgkqhkiG9w0BCQEWGmZhYnJpemlvLnRvcmVsbGlAd2lw
-    cm8uY29tMB4XDTE3MDQxMDIxMzgwNloXDTI3MDQwODIxMzgwNlowgZ8xCzAJBgNV
-    BAYTAklFMQ8wDQYDVQQIDAZEdWJsaW4xDzANBgNVBAcMBkR1YmxpbjEiMCAGA1UE
-    CgwZQnVpbGRJdCBXaXBybyBEaWdpdGFsIEx0ZDELMAkGA1UECwwCSVQxEjAQBgNV
-    BAMMCWxvY2FsaG9zdDEpMCcGCSqGSIb3DQEJARYaZmFicml6aW8udG9yZWxsaUB3
-    aXByby5jb20wdjAQBgcqhkjOPQIBBgUrgQQAIgNiAAQyaiUDkvfNd2qoQAknKYJC
-    Zq/ZkRHTIbzYDLFIHdYvuYXZPGjHDHLd9Y8/XjTpaMzrdmqh4YPmnGMu1tvQbx4R
-    F3sqq00LktEo34Zxvm4caKAnnbiIrXcZ5o6/38nuxsijUDBOMB0GA1UdDgQWBBSb
-    sNdCcoVW1TjC0lIFwbTUH4SkTTAfBgNVHSMEGDAWgBSbsNdCcoVW1TjC0lIFwbTU
-    H4SkTTAMBgNVHRMEBTADAQH/MAoGCCqGSM49BAMCA2gAMGUCMQCr11b/KAgjTS56
-    yjWP1KY8atQqLiuEJzLBa8NwDfz9cEMM2c6jB83mFp6Z+8/6dcoCMHYVu8sjM/zj
-    vseQQXY+OaiAyM8mEqe4AJ+d/aaK58vjo9Bi8v/vpi7yOh8WUnLtvw==
+    GUJ1aWxkaXQgV2lwcm8gRGlnaXRhbCBMdGQxCzAJBgNVBAsMAklUMSQwIgYDVQQD
+    DBtidWlsZGl0dGVjaC1wcm9kLmFwaWdlZS5uZXQxKTAnBgkqhkiG9w0BCQEWGmZh
+    YnJpemlvLnRvcmVsbGlAd2lwcm8uY29tMB4XDTE3MDQxMjExNTIyNloXDTI3MDQx
+    MDExNTIyNlowgbExCzAJBgNVBAYTAklFMQ8wDQYDVQQIDAZEdWJsaW4xDzANBgNV
+    BAcMBkR1YmxpbjEiMCAGA1UECgwZQnVpbGRpdCBXaXBybyBEaWdpdGFsIEx0ZDEL
+    MAkGA1UECwwCSVQxJDAiBgNVBAMMG2J1aWxkaXR0ZWNoLXByb2QuYXBpZ2VlLm5l
+    dDEpMCcGCSqGSIb3DQEJARYaZmFicml6aW8udG9yZWxsaUB3aXByby5jb20wdjAQ
+    BgcqhkjOPQIBBgUrgQQAIgNiAAS2lG7Ga7UIfiDqUVr2bIwK0ZtyrJmA9tr7QqTv
+    mx/NWbd6ExM8JFMAbH9GpYvR+cVaVV9tZncQ4JaBNws6z4GUlMUR1obrM18DslwH
+    m1x+doyF2YlByPgp7of/E8xq5v2jUDBOMB0GA1UdDgQWBBS2Fm0/P3LioD7NvU+4
+    nsxcQ5a/1jAfBgNVHSMEGDAWgBS2Fm0/P3LioD7NvU+4nsxcQ5a/1jAMBgNVHRME
+    BTADAQH/MAoGCCqGSM49BAMCA2gAMGUCMQCecJSPC6g/9SHvNRhz9y4SOhkJcd+8
+    Y3gws47zhsxCcMrg6HqqgMOOHqPEICgtrqICMESzZ4z87m3DkSTJwzqqkrf04cPw
+    U2tpKz2csS2dCyg3y4xxsYpfjrjqYPEmehuUyw==
     -----END CERTIFICATE-----
 gateway_services_x509_key: |
     -----BEGIN EC PARAMETERS-----
     BgUrgQQAIg==
     -----END EC PARAMETERS-----
     -----BEGIN EC PRIVATE KEY-----
-    MIGkAgEBBDA9NxMDw449puVH9UTbIbwqcFDpkoHLqM4lCXihbosCTXn/8bFp0ZBR
-    t1CNHegAfeegBwYFK4EEACKhZANiAAQyaiUDkvfNd2qoQAknKYJCZq/ZkRHTIbzY
-    DLFIHdYvuYXZPGjHDHLd9Y8/XjTpaMzrdmqh4YPmnGMu1tvQbx4RF3sqq00LktEo
-    34Zxvm4caKAnnbiIrXcZ5o6/38nuxsg=
+    MIGkAgEBBDAFgxmh6VUqxf+oWuzH3iOaJ/UpW8dLf1P6g84CGlf+bUGhN7MBW+G+
+    I+S1yWqS7oegBwYFK4EEACKhZANiAAS2lG7Ga7UIfiDqUVr2bIwK0ZtyrJmA9tr7
+    QqTvmx/NWbd6ExM8JFMAbH9GpYvR+cVaVV9tZncQ4JaBNws6z4GUlMUR1obrM18D
+    slwHm1x+doyF2YlByPgp7of/E8xq5v0=
     -----END EC PRIVATE KEY-----
-gateway_services_server_crs:
-gateway_services_ca_certificate:
-gateway_services_ca_key:
-gateway_services_srl_crs:
-gateway_services_ca_passphrase:
+gateway_services_server_crs: ""
+gateway_services_ca_certificate: ""
+gateway_services_ca_key: ""
+gateway_services_srl_crs: ""
+gateway_services_ca_passphrase: ""
 
 gateway_security_folder: /root/.ssh
 gateway_index_tsl_enabled: false
-gateway_index_x509_certificate_file:
-gateway_index_x509_key_file:
-gateway_index_server_crs_file:
-gateway_index_ca_certificate_file:
-gateway_index_ca_key_file:
-gateway_index_ca_srl_file:
+gateway_index_x509_certificate_file: ""
+gateway_index_x509_key_file: ""
+gateway_index_server_crs_file: ""
+gateway_index_ca_certificate_file: ""
+gateway_index_ca_key_file: ""
+gateway_index_ca_srl_file: ""
 gateway_services_tsl_enabled: false
-gateway_services_x509_certificate_file:
-gateway_services_x509_key_file:
-gateway_services_server_crs_file:
-gateway_services_ca_certificate_file:
-gateway_services_ca_key_file:
-gateway_services_ca_srl_file:
+gateway_services_x509_certificate_file: ""
+gateway_services_x509_key_file: ""
+gateway_services_server_crs_file: ""
+gateway_services_ca_certificate_file: ""
+gateway_services_ca_key_file: ""
+gateway_services_ca_srl_file: ""
 ###### OTHER (to cleanup) #######
 
 riglet_domain: riglet

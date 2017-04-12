@@ -12,6 +12,15 @@
 - name: ensure docker running
   service: name=docker state=restarted enabled=yes
 
+- name: Define Edge Micro Keys and Certificates Shell Script
+  template: src=get-edgemicro-keys.sh.j2 dest=/root/get-edgemicro-keys.sh mode=777 owner=root
+
+# - name: Create Edge Micro Keys and Certificates
+#   shell: /root/get-edgemicro-keys.sh
+#   args:
+#     chdir: /root
+#     create: /root/.ssh/cert.pem
+
 - name: Ensure that Nginx config directory exists
   file: path=/root/nginx state=directory mode=0777
 
@@ -28,7 +37,7 @@
     - docker-registry.htpasswd
 
 - name: Define Nginx dunamic config
-  trmplate: src="docker-registry.conf.j2" dest=/root/nginx/docker-registry.conf
+  template: src="ngnix-config.conf.j2" dest=/root/nginx/apigee-config.conf
 
 - name: Ensure that Nginx ssl configuration directory exists
   file: path=/root/ssl state=directory mode=0777
@@ -44,6 +53,7 @@
 
 - name: ensure Docker Compose registry dir
   file: name="/usr/share/compose-scripts/registry" state=directory owner=root group=root
+
 
 - name: Copy Nginx files
   template: src=docker-compose.yml.j2 dest=/usr/share/compose-scripts/registry/docker-compose.yml

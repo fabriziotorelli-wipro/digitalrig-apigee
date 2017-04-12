@@ -1,5 +1,5 @@
 
-- name: Define GOPATH folder
+- name: Define pipeline installation folder
   file: path=/root/pipeline state=directory
 
 - name: Define Docker Compose file

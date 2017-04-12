@@ -28,16 +28,16 @@
   copy: content="{{ centos_public_key }}" dest="{{ centos_home }}/.ssh/id_rsa.pub" owner=centos group=centos mode=400
   ignore_errors: true
 
-- name: add a rancher root public key to centos authorized hosts
+- name: add a centos root public key to centos authorized hosts
   authorized_key:
     user: "centos"
     key: '{{ root_public_key }}'
     state: present
 
-- name: add a rancher user public key to centos authorized hosts
+- name: add a centos user public key to centos authorized hosts
   authorized_key:
     user: "centos"
-    key: '{{ public_key }}'
+    key: '{{ centos_public_key }}'
     state: present
 
 - name: add a rancher ubuntu user public key to centos authorized hosts
@@ -66,21 +66,21 @@
     key: '{{ centos_public_key }}'
     state: present
 
-- name: add a rancher public key to root authorized hosts
+- name: add a ubuntu public key to root authorized hosts
   authorized_key:
     user: root
     key: '{{ ubuntu_public_key }}'
     state: present
 
-- name: add a rancher public key to root authorized hosts
+- name: add a root public key to root authorized hosts
   authorized_key:
     user: root
     key: '{{ root_public_key }}'
     state: present
 
-- name: add a self root public key to root authorized hosts
+- name: add a centos root public key to root authorized hosts
   authorized_key:
     user: root
-    key: '{{ public_key }}'
+    key: '{{ centos_public_key }}'
     state: present
   notify: Restart docker

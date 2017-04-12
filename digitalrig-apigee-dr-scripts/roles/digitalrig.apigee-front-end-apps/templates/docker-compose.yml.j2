@@ -32,7 +32,7 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - /root/nginx/docker-registry.conf:/etc/nginx/conf.d/default.conf:ro
+      - /root/nginx/apigee-config.conf:/etc/nginx/conf.d/default.conf:ro
       - /root/nginx/directory.html:/usr/share/nginx/html/directory.html:ro
       - /root/ssl:/usr/share/nginx/ssl:ro
       - /root/nginx/docker-registry.htpasswd:/etc/nginx/htpasswd/docker-registry.htpasswd:ro

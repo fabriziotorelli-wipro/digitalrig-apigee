@@ -56,7 +56,7 @@ openssl ecparam -genkey -name secp384r1 -out server.key
 openssl req -new -x509 -sha256 -key server.key -out server.pem -days 3650
 ```
 
-## TLS Self-Signed CA Certificates
+## TLS Self-Signed CA Certificates (*NOT TESTED YET*)
 
 ##### Generate root key (rootCA.key)
 
@@ -121,7 +121,7 @@ Replacing the $font-end-public-ip with value in file `/digitalrig-apigee-riglet/
 
 0. Define variables in `inputs` file :
   * `apigee_gateway_proxy_url`: APIGee environment Gateway Reverse Proxy url (ex: http://myorg.myenv.apigee.net/gateway)
-  * `apigee_edge_proxy_path`: APIGee environment Gateway Reverse Proxy url (ex: http://myorg.myenv.apigee.net/edgemicro_gateway)
+  * `apigee_edge_proxy_path`: APIGee environment Gateway Reverse Proxy url (ex: http://localhost:8000/edgemicro_gateway)
 
 
 0. Make sure you're able to open ssh connection to jump host. Command and hostname are the output of "show jump host information" task in the previous step.
