@@ -113,11 +113,11 @@ Remember to store new keys in `vars` file in the located at : `/digital-apigee-r
 Replacing the $font-end-public-ip with value in file `/digitalrig-apigee-riglet/etc/tmp/_tf_ouputs` corresponding to the variable named `front_end_public_ip`. In this way the access to your Gateway is allowed only in https and only from front-end Ngnix call (very secure).
 
 0. Define on APIGee gateway web console a Self-Signed certificate in ADMIN -> Environment (prod) -> TLS section :
-  Define A TLS Keystore and define a certificate with common name : in file `/digitalrig-apigee-riglet/etc/tmp/_tf_ouputs` corresponding to the variable named `front_end_public_ip` and alternative names all host you want access to APIGee (very secure) and alis name `myorg-frontend`. (Repeate previous bullet points to create another identical proxy named `edgemicro_gateway`)
+  Define A TLS Keystore and define a certificate with common name : in file `/digitalrig-apigee-riglet/etc/tmp/_tf_ouputs` corresponding to the variable named `front_end_public_ip` and alternative names all host you want access to APIGee (very secure) and alis name `<myorg>-frontend`. (Repeate previous bullet points to create another identical proxy named `edgemicro_gateway`)
 
-0. Define on APIGee gateway web console (DEVELOP) a Shared Flow for production and deploy the flow (Now your proxy is operative).
+0. Define on APIGee gateway web console (DEVELOP) a Shared Flow and deploy the flow on production [PROD] (Now your proxy is operative).
 
-0. In case of licensed APIGee Edge account you can change the SSL Virtual Host [ADMIN -> Environment (prod)] enabling Client Auth and associating the certificate you have just defined.
+0. In case of licensed APIGee Edge account you can change the [SSL] Virtual Host [ADMIN -> Environment (prod)] enabling Client Auth and associating the certificate you have just defined (named `<myorg>-frontend`).
 
 0. Define variables in `inputs` file :
   * `apigee_gateway_proxy_url`: APIGee environment Gateway Reverse Proxy url (ex: http://myorg.myenv.apigee.net/gateway)
