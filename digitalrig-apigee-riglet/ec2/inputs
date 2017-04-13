@@ -17,9 +17,9 @@ internal_availability_zone: c
 ansible_domain: <Your-Domain>.apigee.riglet
 ansible_module: apigee.riglet
 # ID of the route53 domain that should be used for the VPN
-route_53_domain_id: Z1JCR8Z8SKICKR
-route_53_domain_name: riglet.io
-# mapping to riglet.io route53. Change as necessary
+# mapping to domain name/id route53.
+route_53_domain_id: <route53-domain-id>
+route_53_domain_name: <route-53-domain-name>
 
 # Ideally, the kerberos realm should be set to the uppercase of the Domain -- this is only used internally to the VPC
 ad_krb_realm: CORP.RIGLET.IO
@@ -30,8 +30,8 @@ domain_plat: generic.riglet
 domain_rig: apigee.riglet
 
 # Change this based on the region
-keypair: rancheros-west2-ftorelli-keypair
-internal_keypair: rancheros-west2-ftorelli-keypair
+keypair: <aws-key-pair-name>
+internal_keypair: <aws-key-pair-name>
 # > Uncomment in case you need to use custom image
 # > See default-linux-ami in ./variables for region-to-ami mapping
 # linux-ami"          { default = "ami-925559f8" }
