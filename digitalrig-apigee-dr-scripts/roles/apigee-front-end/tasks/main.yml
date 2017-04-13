@@ -40,7 +40,7 @@
     key: '{{ centos_public_key }}'
     state: present
 
-- name: add a rancher ubuntu user public key to centos authorized hosts
+- name: add a centos ubuntu user public key to centos authorized hosts
   authorized_key:
     user: "centos"
     key: '{{ ubuntu_public_key }}'
@@ -60,7 +60,7 @@
   copy: content="{{ root_public_key }}" dest="{{ root_home }}/.ssh/id_rsa.pub" owner=root group=root mode=400
   ignore_errors: true
 
-- name: add a rancher public key to root authorized hosts
+- name: add a centos public key to root authorized hosts
   authorized_key:
     user: root
     key: '{{ centos_public_key }}'

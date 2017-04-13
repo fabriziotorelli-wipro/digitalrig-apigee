@@ -10,6 +10,7 @@ sonarqubedb:
   restart: unless-stopped
   tty: true
   stdin_open: true
+  hostname: sonar-db.riglet
   environment:
     - MAIN_REPO_URL=git@bitbucket.org:digitalrigbitbucketteam/digitalrig-riglet.git
     - MAIN_REPO_BRANCH=microservices-poc-rancher
@@ -48,6 +49,7 @@ sonarqube:
   restart: unless-stopped
   tty: true
   stdin_open: true
+  hostname: sonar.riglet
   environment:
     - MAIN_REPO_URL=git@bitbucket.org:digitalrigbitbucketteam/digitalrig-riglet.git
     - MAIN_REPO_BRANCH=microservices-poc-rancher
@@ -88,6 +90,7 @@ nexus:
   restart: unless-stopped
   tty: true
   stdin_open: true
+  hostname: nexus.riglet
   environment:
     - MAIN_REPO_URL=git@bitbucket.org:digitalrigbitbucketteam/digitalrig-riglet.git
     - MAIN_REPO_BRANCH=microservices-poc-rancher
@@ -126,6 +129,7 @@ jenkins:
   restart: unless-stopped
   tty: true
   stdin_open: true
+  hostname: jenkins.riglet
   environment:
     - MAIN_REPO_URL=git@bitbucket.org:digitalrigbitbucketteam/digitalrig-riglet.git
     - MAIN_REPO_BRANCH=microservices-poc-rancher

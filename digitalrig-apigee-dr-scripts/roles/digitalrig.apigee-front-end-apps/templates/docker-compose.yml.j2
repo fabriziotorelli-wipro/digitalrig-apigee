@@ -5,9 +5,9 @@ services:
     image: registry:2
     container_name: registry
     restart: unless-stopped
-    # environment:
-    #   - REGISTRY_HTTP_TLS_CERTIFICATE=/certs/server.crt
-    #   - REGISTRY_HTTP_TLS_KEY=/certs/server.key
+    environment:
+      - REGISTRY_HTTP_TLS_CERTIFICATE=/certs/server.crt
+      - REGISTRY_HTTP_TLS_KEY=/certs/server.key
     ports:
       - "9000:5000"
     volumes:
