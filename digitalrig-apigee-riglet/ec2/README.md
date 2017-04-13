@@ -156,11 +156,17 @@ This step will create server features and the Jenkins test pipeline
   0. Re-run required step.
 * In case ssh to jump host does not work
   * Configure key authentication for VPC subnet `10.10.243.*` mask and jump host by adding following lines to your ~/.ssh/config
-  ```bash
+  ```sh
   Host 10.10.243.* <<jump.host.name>>
       User centos
       IdentityFile <<path/to/internal/private/key>>
   ```
+### Troubleshooting
+
+Testing the API Gateway :
+* call https://<front-end-public-ip> -> then click on link 'APIGee Jenkins API Proxy Call' or
+call https://<front-end-public-ip>/apigee the add discovered service at the end of the path (e.g.: https://<front-end-public-ip>/apigee/Jenkins for Jenkins API access thru APIGee proxy)
+* Use account admin/admin or user/user to authenticate the front-end
 
 ### Related articles
 

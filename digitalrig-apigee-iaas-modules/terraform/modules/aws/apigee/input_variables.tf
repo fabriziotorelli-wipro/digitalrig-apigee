@@ -6,7 +6,7 @@ variable "internal-net-cidr"    {  }
 variable "internal-net-prefix"  {  }
 variable "internal-availability-zone" {}
 variable "ansible-domain"       {  }
-variable "ansible-inventory"    { default = "riglet-rancher" }
+variable "ansible-inventory"    { default = "riglet-apigee" }
 
 variable "route-53-domain-id"   {  }
 variable "subnets"              { default = "['10.10.0.0 255.255.0.0']" }

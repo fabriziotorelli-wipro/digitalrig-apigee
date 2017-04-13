@@ -26,7 +26,7 @@ module "apigee" {
   internal-keypair = "${var.internal-keypair}"
 
   # Change the inventory name to be used, only if needed
-  ansible-inventory = "riglet-rancher"
+  ansible-inventory = "riglet-apigee"
   dr-scripts-ref = "${var.dr-scripts-ref}"
   digitalrig-riglet-ref = "${var.digitalrig-riglet-ref}"
   platform-ref = "${var.platform-ref}"

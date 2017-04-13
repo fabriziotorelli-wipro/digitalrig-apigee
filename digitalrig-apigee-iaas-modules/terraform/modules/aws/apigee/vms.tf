@@ -155,10 +155,9 @@ resource "aws_instance" "docker-ci-cd" {
   key_name = "${var.internal-keypair}"
   iam_instance_profile = "internal-instance"
   vpc_security_group_ids = [
-    "${aws_security_group.default.id}",
-    "${aws_security_group.ovpn.id}"
+    "${aws_security_group.default.id}"
   ]
-  subnet_id = "${aws_subnet.public.id}"
+  subnet_id = "${aws_subnet.internal.id}"
   source_dest_check = false
   associate_public_ip_address = false
   user_data = "${replace("${data.template_file.client_cloud_config.rendered}", "REPLACE_HOSTNAME", "docker-ci-cd")}"
