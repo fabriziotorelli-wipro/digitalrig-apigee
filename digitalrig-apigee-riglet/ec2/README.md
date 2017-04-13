@@ -27,6 +27,9 @@ To build the rig on EC2:
     * `ad_password:`: define administrative password for AD and the same you can use to login the OVPN.
     * `route_53_domain_id`: define route 53 domain id (see AWS route 53 section)
     * `route_53_domain_name`: define route 53 domain name  (see AWS route 53 section)
+    * `ad_krb_realm`: Uppercase AD Realm
+    * `krb_domain`: Lowercase AD domain
+    * `base_dn`: Base DN user to store credentials
     * `edgemicro_org`: define APIGee Organization
     * `edgemicro_env`: define APIGee Environment (test/prod/..)
     * `edgemicro_user`: define APIGee Edge user (developer or admin)
