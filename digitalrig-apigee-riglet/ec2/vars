@@ -181,6 +181,8 @@ gateway_services_server_crs_file: ""
 gateway_services_ca_certificate_file: ""
 gateway_services_ca_key_file: ""
 gateway_services_ca_srl_file: ""
+apigee_custom_x509_certificate: ""
+apigee_custom_x509_certificate_key: ""
 ###### OTHER (to cleanup) #######
 
 riglet_domain: riglet

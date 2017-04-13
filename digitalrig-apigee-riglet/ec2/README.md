@@ -12,7 +12,6 @@ Here the project with the purpose of creating a base, extendable rancher server 
     * boto
     * pywinrm
     * six
-    * pexpect
 
 ## Install
 To build the rig on EC2:
@@ -39,65 +38,68 @@ To build the rig on EC2:
     * `edgemicro_router`: URL to Edge Gateway Router  (ex: http://myorg.myenv.apigee.net)
     * `edgemicro_api_mngmt`: URL to API Management Server (ex: http://myorg.myenv.apigee.net)
 
+0. In case of licensed APIGee account, and virtualhost ssl validation define a new TLS self signed certificate and upload it on APIGee Web Console in ADMIN -> Environment -> TLS Keystore and report SSL certificate and key in [vars file](/digitalrig-apigee-riglet/ec2/vars)  in these variables :
+    * apigee_custom_x509_certificate: APIGee custom X509 Self signed certificate
+    * apigee_custom_x509_certificate_key: APIGee custom X509 Self signed certificate key
 
-0. Define X509 Certificate keys (for a self-signed server certificate with common name as the `APIGee organization gateway hostname or IP` for defining remote access to Gateway Port Services and another server certificate with `localhost` common name for defining local access to Gateway Index Services), for instance as follow :
+    You can define X509 Certificate keys (for a self-signed server certificate with common name as the `APIGee organization gateway hostname or IP` for defining remote access to Gateway Port Services and another server certificate with `localhost` common name for defining local access to Gateway Index Services), for instance as follow :
 
-## TLS Self-Signed Certificates
+    ## TLS Self-Signed Certificates
 
-##### Generate private key (.key)
+    ##### Generate private key (.key)
 
-```sh
-# Key considerations for algorithm "RSA" ≥ 2048-bit
-openssl genrsa -out server.key 2048
+    ```sh
+    # Key considerations for algorithm "RSA" ≥ 2048-bit
+    openssl genrsa -out server.key 2048
 
-# Key considerations for algorithm "ECDSA" ≥ secp384r1
-# List ECDSA the supported curves (openssl ecparam -list_curves)
-openssl ecparam -genkey -name secp384r1 -out server.key
-```
+    # Key considerations for algorithm "ECDSA" ≥ secp384r1
+    # List ECDSA the supported curves (openssl ecparam -list_curves)
+    openssl ecparam -genkey -name secp384r1 -out server.key
+    ```
 
-##### Generation of self-signed(x509) public key (PEM-encodings `.pem`|`.crt`) based on the private (`.key`)
+    ##### Generation of self-signed(x509) public key (PEM-encodings `.pem`|`.crt`) based on the private (`.key`)
 
-```sh
-openssl req -new -x509 -sha256 -key server.key -out server.pem -days 3650
-```
+    ```sh
+    openssl req -new -x509 -sha256 -key server.key -out server.pem -days 3650
+    ```
 
-## TLS Self-Signed CA Certificates (*NOT TESTED YET*)
+    ## TLS Self-Signed CA Certificates (*NOT TESTED YET*)
 
-##### Generate root key (rootCA.key)
+    ##### Generate root key (rootCA.key)
 
-```sh
-# Key considerations for algorithm "RSA" ≥ 2048-bit
-openssl genrsa -out rootCA.key 2048
+    ```sh
+    # Key considerations for algorithm "RSA" ≥ 2048-bit
+    openssl genrsa -out rootCA.key 2048
 
-#The standard key sizes today are 1024, 2048, and to a much lesser extent, 4096. We choose a very private key.
-# It's very important to pay attention to common name, it defines the server who has access to the services
-# Common Name (eg, YOUR name) []: 10.0.0.1
-openssl genrsa -des3 -out rootCA.key 2048
-```
+    #The standard key sizes today are 1024, 2048, and to a much lesser extent, 4096. We choose a very private key.
+    # It's very important to pay attention to common name, it defines the server who has access to the services
+    # Common Name (eg, YOUR name) []: 10.0.0.1
+    openssl genrsa -des3 -out rootCA.key 2048
+    ```
 
-##### The next step is to self-sign this certificate
-```sh
-openssl req -x509 -new -nodes -key rootCA.key -sha256 -days 1024 -out rootCA.pem
-```
+    ##### The next step is to self-sign this certificate
+    ```sh
+    openssl req -x509 -new -nodes -key rootCA.key -sha256 -days 1024 -out rootCA.pem
+    ```
 
-##### Generate private key (.key)
+    ##### Generate private key (.key)
 
-```sh
-# Key considerations for algorithm "RSA" ≥ 2048-bit
-openssl genrsa -out server.key 2048
+    ```sh
+    # Key considerations for algorithm "RSA" ≥ 2048-bit
+    openssl genrsa -out server.key 2048
 
-# It's very important to pay attention to common name, it defines the server who has access to the services
-# Common Name (eg, YOUR name) []: 10.0.0.1
-openssl req -new -key server.key -out server.csr
-```
+    # It's very important to pay attention to common name, it defines the server who has access to the services
+    # Common Name (eg, YOUR name) []: 10.0.0.1
+    openssl req -new -key server.key -out server.csr
+    ```
 
-##### Generation of self-signed(x509) public key (PEM-encodings `.pem`|`.crt`) based on the private (`.crs`)
+    ##### Generation of self-signed(x509) public key (PEM-encodings `.pem`|`.crt`) based on the private (`.crs`)
 
-```sh
-openssl x509 -req -in server.csr -CA rootCA.pem -CAkey rootCA.key -CAcreateserial -out server.crt -days 1024 -sha256
-```
+    ```sh
+    openssl x509 -req -in server.csr -CA rootCA.pem -CAkey rootCA.key -CAcreateserial -out server.crt -days 1024 -sha256
+    ```
 
-Remember to store new keys in `vars` file in the located at : `/digital-apigee-riglet/ec2/vars`
+    Remember you can store new keys in `vars` file in the located at : `/digital-apigee-riglet/ec2/vars`. If you enable TLS protection for gateway APIGee won't be able to establish that channel. To TSL thrust protocol has defined in APIGee Reverse Proxy.
 
 0. Execute Terraform (parameters from `input` will be passed to TF)
   `ansible-playbook -i ./inventory/localhost -e @vars -e @inputs -e @private ../tf_run.yml`
@@ -108,14 +110,14 @@ Remember to store new keys in `vars` file in the located at : `/digital-apigee-r
 0. Define on APIGee gateway web console (DEVELOP) a Proxy named `gateway`, type `reverse proxy`, using the gateway IP (in `/digitalrig-apigee-riglet/etc/tmp/_tf_ouputs` you have an ip address corresponding to the variable named `gateway_public_ip`) and port `10099`. The URL will be pretty much similar to this sampler : `https://xxx.xxx.xxx.xxx:10099/`.
 
 0. Define on APIGee gateway web console an `Access Control` Rule in development -> policies -> Add Access Control and defining changes as follow :
-```xml
-<IPRules noRuleMatchAction="DENY">
-    <MatchRule action="ALLOW">
-        <SourceAddress mask="32">$font-end-public-ip</SourceAddress>
-    </MatchRule>
-</IPRules>
-```
-Replacing the $font-end-public-ip with value in file `/digitalrig-apigee-riglet/etc/tmp/_tf_ouputs` corresponding to the variable named `front_end_public_ip`. In this way the access to your Gateway is allowed only in https and only from front-end Ngnix call (very secure).
+    ```xml
+    <IPRules noRuleMatchAction="DENY">
+        <MatchRule action="ALLOW">
+            <SourceAddress mask="32">$font-end-public-ip</SourceAddress>
+        </MatchRule>
+    </IPRules>
+    ```
+    Replacing the $font-end-public-ip with value in file `/digitalrig-apigee-riglet/etc/tmp/_tf_ouputs` corresponding to the variable named `front_end_public_ip`. In this way the access to your Gateway is allowed only in https and only from front-end Ngnix call (very secure).
 
 0. Define on APIGee gateway web console a Self-Signed certificate in ADMIN -> Environment (prod) -> TLS section :
   Define A TLS Keystore and define a certificate with common name : in file `/digitalrig-apigee-riglet/etc/tmp/_tf_ouputs` corresponding to the variable named `front_end_public_ip` and alternative names all host you want access to APIGee (very secure) and alis name `<myorg>-frontend`. (Repeate previous bullet points to create another identical proxy named `edgemicro_gateway`)
@@ -125,8 +127,8 @@ Replacing the $font-end-public-ip with value in file `/digitalrig-apigee-riglet/
 0. In case of licensed APIGee Edge account you can change the [SSL] Virtual Host [ADMIN -> Environment (prod)] enabling Client Auth and associating the certificate you have just defined (named `<myorg>-frontend`).
 
 0. Define variables in `inputs` file :
-  * `apigee_gateway_proxy_url`: APIGee environment Gateway Reverse Proxy url (ex: http://myorg.myenv.apigee.net/gateway)
-  * `apigee_edge_proxy_path`: APIGee environment Gateway Reverse Proxy url (ex: http://localhost:8000/edgemicro_gateway)
+    * `apigee_gateway_proxy_url`: APIGee environment Gateway Reverse Proxy url (ex: http://myorg.myenv.apigee.net/gateway)
+    * `apigee_edge_proxy_path`: APIGee environment Gateway Reverse Proxy url (ex: http://localhost:8000/edgemicro_gateway)
 
 
 0. Make sure you're able to open ssh connection to jump host. Command and hostname are the output of "show jump host information" task in the previous step.

@@ -41,8 +41,8 @@ server {
     }
 
     location /apigee {
-      #ssl_certificate           /etc/nginx/apigee.crt;
-      #ssl_certificate_key       /etc/nginx/apigee.key;
+    {{ 'ssl_certificate           /usr/share/nginx/ssl/apigee.crt;' if apigee_custom_x509_certificate != "" }}
+    {{ 'ssl_certificate           /usr/share/nginx/ssl/apigee.key;' if apigee_custom_x509_certificate_key != "" }}
 
       # Fix the “It appears that your reverse proxy set up is broken" error.
       proxy_pass          {{ apigee_gateway_proxy_url }};
@@ -52,8 +52,8 @@ server {
     }
 
     location /edge {
-      #ssl_certificate           /etc/nginx/apigee.crt;
-      #ssl_certificate_key       /etc/nginx/apigee.key;
+    {{ 'ssl_certificate           /usr/share/nginx/ssl/apigee.crt;' if apigee_custom_x509_certificate != "" }}
+    {{ 'ssl_certificate           /usr/share/nginx/ssl/apigee.key;' if apigee_custom_x509_certificate_key != "" }}
 
       # Fix the “It appears that your reverse proxy set up is broken" error.
       proxy_pass          {{ apigee_gateway_proxy_url }};

@@ -45,6 +45,14 @@
 - name: create self-signed SSL cert
   command: openssl req -new -nodes -x509 -subj "/C=US/ST=Oregon/L=Portland/O=IT/CN=front-end" -days 3650 -keyout /root/ssl/server.key -out /root/ssl/server.pem -extensions v3_ca creates=/root/ssl/server.pem
 
+- name: Save APIGee certificate
+  copy: content="{{ apigee_custom_x509_certificate }}" dest="/root/ssl/apigee.crt"
+  when: apigee_custom_x509_certificate != ""
+
+- name: Save APIGee certificate key
+  copy: content="{{ apigee_custom_x509_certificate_key }}" dest="/root/ssl/apigee.key"
+  when: apigee_custom_x509_certificate_key != ""
+
 - name: ensure Docker Registry Web UI data dir
   file: name="/root/nginx/data" state=directory owner=root group=root
 
