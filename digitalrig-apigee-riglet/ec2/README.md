@@ -25,14 +25,14 @@ To build the rig on EC2:
     * `public-availability-zone` and `internal_availability_zone`: check your region to see what's available. These **must** be different.
     * `internal_keypair` and `keypair`: they are not named the same in each region(!). Create your own with your private key in the AWS EC2 console -> Network and Security -> Key Pairs then add key pair.., please provide a standard name such as : rancher-<initial><lastname>-<region>-keypair (It's suitable to create one key pair with you pubic key and save the name in the inputs file)
     * `ad_password:`: define administrative password for AD and the same you can use to login the OVPN.
-    * `edgemicro_org`: <my-organization-here>
-    * `edgemicro_env`: <my-environment-here>
-    * `edgemicro_user`: <my-apigee-user-here>
-    * `edgemicro_pass`: <my-apigee-secret-here>
-    * `edgemicro_consumer_credentials`: <my-comma-separated-and column-separated-application-credentials-here>
-    * `edgemicro_private_cloud`: <yes-or-not-allowed-for-admins-only>
-    * `edgemicro_router`: <apigee-full-qualified-router-url> (ex: http://myorg.myenv.apigee.net)
-    * `edgemicro_api_mngmt`: <apigee-full-qualified-api-manager-url> (ex: http://myorg.myenv.apigee.net)
+    * `edgemicro_org`: define APIGee Organization
+    * `edgemicro_env`: define APIGee Environment (test/prod/..)
+    * `edgemicro_user`: define APIGee Edge user (developer or admin)
+    * `edgemicro_pass`: define APIGee Edge user password
+    * `edgemicro_consumer_credentials`: define comma separated list of column separated couple of application key/token
+    * `edgemicro_private_cloud`: yes|no (switch to private cloud)
+    * `edgemicro_router`: URL to Edge Gateway Router  (ex: http://myorg.myenv.apigee.net)
+    * `edgemicro_api_mngmt`: URL to API Management Server (ex: http://myorg.myenv.apigee.net)
 
 
 0. Define X509 Certificate keys (for a self-signed server certificate with common name as the `APIGee organization gateway hostname or IP` for defining remote access to Gateway Port Services and another server certificate with `localhost` common name for defining local access to Gateway Index Services), for instance as follow :
