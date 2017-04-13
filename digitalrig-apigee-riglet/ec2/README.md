@@ -42,7 +42,7 @@ To build the rig on EC2:
     * apigee_custom_x509_certificate: APIGee custom X509 Self signed certificate
     * apigee_custom_x509_certificate_key: APIGee custom X509 Self signed certificate key
 
-    You can define X509 Certificate keys (for a self-signed server certificate with common name as the `APIGee organization gateway hostname or IP` for defining remote access to Gateway Port Services and another server certificate with `localhost` common name for defining local access to Gateway Index Services), for instance as follow :
+    You can define APIGee certificate, as well as you can define X509 Certificate keys (for a self-signed server certificate with common name as the `APIGee organization gateway hostname or IP` [usually you should use the callee, we hope it's sufficient generate a certificate on Font-end ip in the file `/digitalrig-apigee-riglet/ec2/tmp/_tf_outputs.yml` in front-end public ip variable after the TF outputs generation step] for defining remote access to Gateway Port Services and another server certificate with `localhost` common name for defining local access to Gateway Index Services), for instance as follow :
 
     ## TLS Self-Signed Certificates
 
@@ -99,7 +99,7 @@ To build the rig on EC2:
     openssl x509 -req -in server.csr -CA rootCA.pem -CAkey rootCA.key -CAcreateserial -out server.crt -days 1024 -sha256
     ```
 
-    Remember you can store new keys in `vars` file in the located at : `/digital-apigee-riglet/ec2/vars`. If you enable TLS protection for gateway APIGee won't be able to establish that channel. To TSL thrust protocol has defined in APIGee Reverse Proxy.
+    Remember you can store new keys in `vars` file in the located at : `/digital-apigee-riglet/ec2/vars`. If you enable custom TLS protection for gateway, APIGee Proxy won't be able to establish any connection on that channel. No TSL thrust protocol has defined in APIGee Reverse Proxy feature.
 
 0. Execute Terraform (parameters from `input` will be passed to TF)
   `ansible-playbook -i ./inventory/localhost -e @vars -e @inputs -e @private ../tf_run.yml`
@@ -139,9 +139,9 @@ To build the rig on EC2:
 0. Execute RIG init scripts:
   `ansible-playbook -i ./inventory -e @inputs -e @vars -e @../tmp/_tf_outputs.yml rig.yml`
 
-  If you encounter errors completing this script (it can take a while), consider running each referred script in turn (see `rig.yml`).
+    If you encounter errors completing this script (it can take a while), consider running each referred script in turn (see `rig.yml`).
 
-0. Once you are done, connect to VPN (check [section 4a on the wiki](https://digitalrig.atlassian.net/wiki/pages/viewpage.action?pageId=54460451)) and run
+ 0. Once you are done, connect to VPN (check [section 4a on the wiki](https://digitalrig.atlassian.net/wiki/pages/viewpage.action?pageId=54460451)) and run
   `ansible-playbook -i ./inventory -e @inputs -e @vars -e @../tmp/_tf_outputs.yml on_vpn.yml`
 This step will create server features and the Jenkins test pipeline
 
@@ -162,13 +162,16 @@ This step will create server features and the Jenkins test pipeline
       IdentityFile <<path/to/internal/private/key>>
   ```
 
-### Referred articles
+### Related articles
 
 Here some technical material :
+* [APIGee Edge explained](http://docs.apigee.com/api-services/content/what-apigee-edge)
+* [Watch an official APIGee introduction video](https://youtu.be/LssHa1Y_i0g)
+* [Configure APIGee Proxy](http://docs.apigee.com/api-services/content/build-simple-api-proxy)
 * [Configure Edge Micro-Gateway](http://docs.apigee.com/microgateway/latest/setting-and-configuring-edge-microgateway)
-* [Gateway](https://github.com/fabriziotorelli-wipro/go-gateway-reverse/blob/master/README.md)
+* [Gateway Software](https://github.com/fabriziotorelli-wipro/go-gateway-reverse/blob/master/README.md)
 * [Edge Micro-Gateway Docker Image](https://github.com/fabriziotorelli-wipro/rig-docker-machines/blob/master/2/apigee-edge-microgateway/README.md)
-* [Buildit] (https://medium.com/buildit)
+* [Knows more about Buildit] (https://medium.com/buildit)
 
 ## Tips
 * _-vvvv_ is your friend to understand why your playbook does not work

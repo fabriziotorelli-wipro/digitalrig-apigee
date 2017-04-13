@@ -2,6 +2,22 @@
 
 ## Goals
 
+The goal is to define an entire life cycle of communication between a Front-End Machine to a DMZ Network Back-End machine passing thru API Gee Proxy and Network Gateway that redirect call to the Service.
+
+Here a simple communication diagram :
+
+<p align="center"><img width="744" height="397" src="/images/arch1.png"></p>
+
+Here an APIGee enterprise communication diagram :
+
+<p align="center"><img width="744" height="429" src="/images/arch2.png"></p>
+
+The players in the architecture are :
+* Front-End : Ngnix Proxy
+* APIGee Micro-Gateway : Reverse Proxy and Flow
+* Gateway : Buildit Gateway redirecting to the final DMZ infrastructure the calls
+* Pipeline Machine: Machine with a sampler pipeline (Jenkins, SonarQube, Sonar PostgreSQL database and Nexus OSS docker containers)
+
 This project realizes a RIG instance on following cloud providers:
 * Amazon Web Service
 
