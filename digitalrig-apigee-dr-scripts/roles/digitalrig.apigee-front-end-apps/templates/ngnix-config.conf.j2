@@ -40,8 +40,8 @@ server {
     location /apigee {
       auth_basic              "Restricted";
       auth_basic_user_file    /etc/nginx/htpasswd/docker-registry.htpasswd;
-      {{ 'ssl_certificate           /usr/share/nginx/ssl/apigee.crt;' if apigee_custom_x509_certificate != "" }}
-      {{ 'ssl_certificate           /usr/share/nginx/ssl/apigee.key;' if apigee_custom_x509_certificate_key != "" }}
+      {{ 'ssl_certificate           /usr/share/nginx/ssl/apigee.crt;' if apigee_custom_x509_certificate != '' else '' }}
+      {{ 'ssl_certificate           /usr/share/nginx/ssl/apigee.key;' if apigee_custom_x509_certificate_key != '' else '' }}
 
       # Fix the “It appears that your reverse proxy set up is broken" error.
       proxy_pass          {{ apigee_gateway_proxy_url }};
@@ -53,8 +53,8 @@ server {
     location /edge {
       auth_basic              "Restricted";
       auth_basic_user_file    /etc/nginx/htpasswd/docker-registry.htpasswd;
-      {{ 'ssl_certificate           /usr/share/nginx/ssl/apigee.crt;' if apigee_custom_x509_certificate != "" }}
-      {{ 'ssl_certificate           /usr/share/nginx/ssl/apigee.key;' if apigee_custom_x509_certificate_key != "" }}
+      {{ 'ssl_certificate           /usr/share/nginx/ssl/apigee.crt;' if apigee_custom_x509_certificate != '' else '' }}
+      {{ 'ssl_certificate           /usr/share/nginx/ssl/apigee.key;' if apigee_custom_x509_certificate_key != '' else '' }}
 
       # Fix the “It appears that your reverse proxy set up is broken" error.
       proxy_pass          {{ apigee_gateway_proxy_url }};
