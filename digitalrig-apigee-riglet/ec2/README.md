@@ -23,8 +23,10 @@ To build the rig on EC2:
     * `region`
     * `ansible-domain`: unique identifier for your riglet, e.g. `<initial><lastname>.rancher.riglet` or `<team name>.rancher.riglet`
     * `public-availability-zone` and `internal_availability_zone`: check your region to see what's available. These **must** be different.
-    * `internal_keypair` and `keypair`: they are not named the same in each region(!). Create your own with your private key in the AWS EC2 console -> Network and Security -> Key Pairs then add key pair.., please provide a standard name such as : rancher-<initial><lastname>-<region>-keypair (It's suitable to create one key pair with you pubic key and save the name in the inputs file)
+    * `internal_keypair` and `keypair`: they are not named the same in each region(!). Create your own with your private key in the AWS EC2 console -> Network and Security -> Key Pairs then add key pair.., please provide a standard name such as : <initial><lastname>-<region>-keypair (It's suitable to create one key pair with you pubic key and save the name in the inputs file)
     * `ad_password:`: define administrative password for AD and the same you can use to login the OVPN.
+    * `route_53_domain_id`: define route 53 domain id (see AWS route 53 section)
+    * `route_53_domain_name`: define route 53 domain name  (see AWS route 53 section)
     * `edgemicro_org`: define APIGee Organization
     * `edgemicro_env`: define APIGee Environment (test/prod/..)
     * `edgemicro_user`: define APIGee Edge user (developer or admin)
