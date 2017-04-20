@@ -25,6 +25,14 @@ This project realizes a RIG instance on following cloud providers:
 
 Ansible python scripts.
 
+
+## Issues during the Experience definition
+
+APIGee Gateway limitation for free organization on java-callout feature interrupted the experience, no Edge-Microgateway feature could be tested on a free account.
+
+Reference Topic for the Issue: [Official APIGee Cloud Blog](https://apigee.cloud.answerhub.com/questions/37212/edge-micro-gateway-233-beta-configurations-not-dow.html)
+
+
 ## Implementations
 
 This project has following implementations:
