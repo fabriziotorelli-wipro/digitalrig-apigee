@@ -3,7 +3,7 @@
 
 Here the project with the purpose of creating a base, extendable rancher server domain with pipelines on ApiGee RIG Orchestration Server. Development/Study environment.
 
-## Prereqs
+## Prerequisites
 * Ansible 2.2+
 * AWS CLI with configured creds (`aws configure`)
 * Terraform
@@ -161,9 +161,9 @@ This step will create server features and the Jenkins test pipeline
       User centos
       IdentityFile <<path/to/internal/private/key>>
   ```
-### Troubleshooting
 
-Testing the API Gateway :
+### Testing the API Gateway
+
 * call https://<front-end-public-ip> -> then click on link 'APIGee Jenkins API Proxy Call' or
 call https://<front-end-public-ip>/apigee the add discovered service at the end of the path (e.g.: https://<front-end-public-ip>/apigee/Jenkins for Jenkins API access thru APIGee proxy)
 * Use account admin/admin or user/user to authenticate the front-end
