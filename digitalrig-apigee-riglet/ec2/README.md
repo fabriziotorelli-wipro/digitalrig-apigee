@@ -165,11 +165,12 @@ This step will create server features and the Jenkins test pipeline
 
 ### Testing the API Gateway
 
-* call https://<front-end-public-ip> -> then click on link 'APIGee Jenkins API Proxy Call' or
-call https://<front-end-public-ip>/apigee the add discovered service at the end of the path (e.g.: https://<front-end-public-ip>/apigee/Jenkins for Jenkins API access thru APIGee proxy)
-* Use account admin/admin or user/user to authenticate the front-end
+* call `https://<front-end-public-ip>` -> then click on link 'APIGee Jenkins API Proxy Call'
+* call `https://<front-end-public-ip>/apigee` the add discovered service at the end of the path (e.g.: `https://<front-end-public-ip>/apigee/Jenkins` for Jenkins API access thru APIGee proxy)
 
-The NGINX server access is password protected and the default password is : admin/admin. You can change with your preferred htpasswd file the dr-script -> digital apigee front-end apps role in folder `files`.
+Use this user account : admin/admin or user/user to authenticate the NGNIX Client Gateway.
+
+The NGINX server access is password protected. You can change with your preferred htpasswd file the dr-script -> digital apigee front-end apps role in folder `files`.
 
 ### Related articles
 
