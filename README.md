@@ -13,10 +13,11 @@ Here an APIGee enterprise communication diagram :
 <p align="center"><img width="744" height="429" src="/images/arch2.png"></p>
 
 The players in the architecture are :
-* Front-End : Ngnix Proxy
-* APIGee Micro-Gateway : Reverse Proxy and Flow
-* Gateway : Buildit Gateway redirecting to the final DMZ infrastructure the calls
-* Pipeline Machine: Machine with a sampler pipeline (Jenkins, SonarQube, Sonar PostgreSQL database and Nexus OSS docker containers)
+* Client System : It can be any application that have to request API Rest Services
+* Client Gateway : NGNIX Proxy communicating with your APIGee Proxies
+* APIGee Micro-Gateway : Reverse Proxy and API Manager, APIGee Edge Organization Account
+* Service Gateway : Buildit Gateway API Rest streaming manager, down-streaming APIGee Proxy requests
+* REST API Service: Machine with a sampler pipeline (Jenkins, SonarQube, Sonar PostgreSQL database and Nexus OSS docker containers)
 
 This project realizes a RIG instance on following cloud providers:
 * Amazon Web Service

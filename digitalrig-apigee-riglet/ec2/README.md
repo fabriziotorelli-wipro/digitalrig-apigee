@@ -109,7 +109,7 @@ To build the rig on EC2:
 
 0. Define on APIGee gateway web console (DEVELOP) a Proxy named `gateway`, type `reverse proxy`, using the gateway IP (in `/digitalrig-apigee-riglet/etc/tmp/_tf_ouputs` you have an ip address corresponding to the variable named `gateway_public_ip`) and port `10099`. The URL will be pretty much similar to this sampler : `https://xxx.xxx.xxx.xxx:10099/`.
 
-0. Define on APIGee gateway web console an `Access Control` Rule in development -> policies -> Add Access Control and defining changes as follow :
+0. Define on APIGee gateway web console an `Access Control` Rule for the Proxy in tab : development -> policies -> Add : `Access Control` and provision on that code soma changes, as follow :
     ```xml
     <IPRules noRuleMatchAction="DENY">
         <MatchRule action="ALLOW">
@@ -117,6 +117,7 @@ To build the rig on EC2:
         </MatchRule>
     </IPRules>
     ```
+    Make the Same on the Gateway APIGee Flow used for the `Gateway` Proxy.
     Replacing the $font-end-public-ip with value in file `/digitalrig-apigee-riglet/etc/tmp/_tf_ouputs` corresponding to the variable named `front_end_public_ip`. In this way the access to your Gateway is allowed only in https and only from front-end Ngnix call (very secure).
 
 0. Define on APIGee gateway web console a Self-Signed certificate in ADMIN -> Environment (prod) -> TLS section :
@@ -167,6 +168,8 @@ This step will create server features and the Jenkins test pipeline
 * call https://<front-end-public-ip> -> then click on link 'APIGee Jenkins API Proxy Call' or
 call https://<front-end-public-ip>/apigee the add discovered service at the end of the path (e.g.: https://<front-end-public-ip>/apigee/Jenkins for Jenkins API access thru APIGee proxy)
 * Use account admin/admin or user/user to authenticate the front-end
+
+The NGINX server access is password protected and the default password is : admin/admin. You can change with your preferred htpasswd file the dr-script -> digital apigee front-end apps role in folder `files`.
 
 ### Related articles
 
