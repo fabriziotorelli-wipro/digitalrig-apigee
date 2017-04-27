@@ -12,6 +12,11 @@ Here an APIGee enterprise communication diagram :
 
 <p align="center"><img width="744" height="429" src="/images/arch-enterprise.png"></p>
 
+Here a vertical complete diagram. It specifies the networks related to Experience Actors.
+
+<p align="center"><img width="744" height="429" src="/images/arch-vertical.png"></p>
+
+
 The players in the architecture are :
 * Client System : It can be any application that have to request API Rest Services
 * Client Gateway : NGNIX Proxy communicating with your APIGee Proxies
