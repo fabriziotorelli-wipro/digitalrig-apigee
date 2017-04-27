@@ -12,7 +12,7 @@ Here an APIGee enterprise communication diagram :
 
 <p align="center"><img width="744" height="429" src="/images/arch-enterprise.png"></p>
 
-Here a vertical complete diagram. It specifies the networks related to Experience Actors.
+Here a vertical complete diagram. It specifies the networks related to system actors.
 
 <p align="center"><img width="744" height="690" src="/images/arch-vertical.png"></p>
 
