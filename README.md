@@ -6,11 +6,11 @@ The goal is to define an entire life cycle of communication between a Front-End 
 
 Here a simple communication diagram :
 
-<p align="center"><img width="744" height="397" src="/images/arch1.png"></p>
+<p align="center"><img width="744" height="397" src="/images/arch-simple.png"></p>
 
 Here an APIGee enterprise communication diagram :
 
-<p align="center"><img width="744" height="429" src="/images/arch2.png"></p>
+<p align="center"><img width="744" height="429" src="/images/arch-enterprise.png"></p>
 
 The players in the architecture are :
 * Client System : It can be any application that have to request API Rest Services
