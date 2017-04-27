@@ -14,7 +14,7 @@ Here an APIGee enterprise communication diagram :
 
 Here a vertical complete diagram. It specifies the networks related to system actors :
 
-<p align="center"><img width="744" height="690" src="/images/arch-vertical.png"></p>
+<p align="center"><img width="744" height="690" src="/images/arch-complete-vertical.png"></p>
 
 The players in the architecture are :
 * Client System : It can be any application that have to request API Rest Services
